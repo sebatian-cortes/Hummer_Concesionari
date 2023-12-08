@@ -9,29 +9,29 @@ function obtenerAlmacenamientoLocal(llave) {
 let productos = obtenerAlmacenamientoLocal('productos') || [];
 let mensaje = document.getElementById('mensaje')
 
-//Añadir un producto
-const añadirProducto = document.getElementById('productoAñadir')
-const añadirValor = document.getElementById('valorAñadir')
-const añadirExistencia = document.getElementById('existenciaAñadir')
-const añadirImagen = document.getElementById('ImagenAñadir')
 
-document.getElementById("botonAñadir").addEventListener("click", function (event) {
+const productAdd = document.getElementById('addProduct')
+const priceAdd = document.getElementById('addPrice')
+const stockAdd = document.getElementById('addStock')
+const imgAdd = document.getElementById('addImg')
+
+document.getElementById("addBtn").addEventListener("click", function (event) {
     event.preventDefault()
-    let productoAñadir = añadirProducto.value
-    let valorAñadir = añadirValor.value
-    let existenciaAñadir = añadirExistencia.value
-    let imagenAñadir = añadirImagen.value
+    let addProduct = productAdd.value
+    let addPrice = priceAdd.value
+    let addStock = stockAdd.value
+    let addImg = imgAdd.value
 
     let van = true
 
-    if (productoAñadir == '' || valorAñadir == '' || existenciaAñadir == '' || imagenAñadir == '') {
+    if (addProduct == '' || addPrice == '' || addStock == '' || addImg == '') {
         mensaje.classList.add('llenarCampos')
         setTimeout(() => { mensaje.classList.remove('llenarCampos') }, 2500)
         van = false
     }
     else {
         for (let i = 0; i < productos.length; i++) {
-            if (productos[i].nombre == productoAñadir) {
+            if (productos[i].nombre == addProduct) {
                 mensaje.classList.add('repetidoError')
                 setTimeout(() => { mensaje.classList.remove('repetidoError') }, 2500)
                 van = false
@@ -41,10 +41,10 @@ document.getElementById("botonAñadir").addEventListener("click", function (even
 
     if (van == true) {
         productos.push({
-            nombre: productoAñadir,
-            valor: valorAñadir,
-            existencia: existenciaAñadir,
-            urlImagen: imagenAñadir
+            nombre: addProduct,
+            valor: addPrice,
+            existencia: addStock,
+            urlImagen: addImg
         })
         mensaje.classList.add('realizado')
         setTimeout(() => {
@@ -55,25 +55,25 @@ document.getElementById("botonAñadir").addEventListener("click", function (even
     guardarAlmacenamientoLocal('productos', productos);
 })
 
-// Editar
-const productoEd = document.getElementById('productoEditar')
-const atributoEd = document.getElementById('atributoEditar')
-const nuevoAtributoEd = document.getElementById('nuevoAtributo')
 
-document.getElementById("botonEditar").addEventListener("click", function (event) {
+const productSet = document.getElementById('setProduct')
+const caracterSet = document.getElementById('setCaracter')
+const caracterNew = document.getElementById('newCaracter')
+
+document.getElementById("setBtn").addEventListener("click", function (event) {
     event.preventDefault()
-    let productoEditar = productoEd.value
-    let atributoEditar = atributoEd.value
-    let nuevoAtributo = nuevoAtributoEd.value
+    let setProduct = productSet.value
+    let setCaracter = caracterSet.value
+    let newCaracter = caracterNew.value
     let van = false
-    if (productoEditar == '' || atributoEditar == '' || nuevoAtributo == '') {
+    if (setProduct == '' || setCaracter == '' || newCaracter == '') {
         mensaje.classList.add('llenarCampos')
         setTimeout(() => { mensaje.classList.remove('llenarCampos') }, 2500)
     }
     else {
         for (let i = 0; i < productos.length; i++) {
-            if (productos[i].nombre == productoEditar) {
-                productos[i][atributoEditar] = nuevoAtributo
+            if (productos[i].nombre == setProduct) {
+                productos[i][setCaracter] = newCaracter
                 van = true
             }
         }
@@ -92,16 +92,16 @@ document.getElementById("botonEditar").addEventListener("click", function (event
     }
 })
 
-// Eliminar
-const productoE = document.getElementById('productoEliminar')
 
-document.getElementById("botonEliminar").addEventListener("click", function (event) {
+const productDelete = document.getElementById('deleteProduct')
+
+document.getElementById("deleteBtn").addEventListener("click", function (event) {
     event.preventDefault()
-    let productoEliminar = productoE.value
+    let deleteProduct = productDelete.value
     let van = false
 
     for (let i = 0; i < productos.length; i++) {
-        if (productos[i].nombre == productoEliminar) {
+        if (productos[i].nombre == deleteProduct) {
             productos.splice(i, 1)
             van = true
         }
@@ -121,16 +121,16 @@ document.getElementById("botonEliminar").addEventListener("click", function (eve
     guardarAlmacenamientoLocal('productos', productos);
 })
 
-// mostrar productos
+
 window.addEventListener("load", () => {
-    const productoEd = document.getElementById('productoEditar')
-    const productoEl = document.getElementById('productoEliminar')
+    const productSet = document.getElementById('setProduct')
+    const productDeletel = document.getElementById('deleteProduct')
     for (let i = 0; i < productos.length; i++) {
-        productoEd.innerHTML += `<option>${productos[i].nombre}</option>`
-        productoEl.innerHTML += `<option>${productos[i].nombre}</option>`
+        productSet.innerHTML += `<option>${productos[i].nombre}</option>`
+        productDeletel.innerHTML += `<option>${productos[i].nombre}</option>`
     }
     Object.keys(productos[0]).forEach(element => {
-        atributoEd.innerHTML += `<option>${element}</option>`
+        caracterSet.innerHTML += `<option>${element}</option>`
     });
 
     let mostraProductos = document.getElementById('mostrarProductos')

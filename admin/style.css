@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Space Grotesk', sans-serif;
-    background-color: #141C29;
+    background-color: #12082b;
     padding-top: 80px;
 }
 
@@ -32,6 +32,24 @@ header {
     height: 70px;
 
     width: 100%;
+    background-color: rgb(159 155 139);
+}
+
+header li{
+    list-style: none;
+    text-align: center;
+    background-color: #12082b;
+    border-radius: 5px;
+    width: 180px;
+    height: 30px;
+}
+
+header li ul a{
+    text-decoration: none;
+}
+
+header li ul a:hover{
+    background-color: #0d2c5a;
 }
 
 .container {
@@ -48,7 +66,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: #2D4263;
+    background-color: #1b5789;
     height: 400px;
     width: 400px;
     border-radius: 20px;
